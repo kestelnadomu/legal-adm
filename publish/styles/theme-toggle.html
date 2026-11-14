@@ -1,0 +1,25 @@
+<script>
+// Press "t" to switch light/dark. Without a saved choice the system
+// preference applies (handled in slides.scss).
+(function () {
+  var root = document.documentElement, KEY = "deck-theme";
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch (e) {}
+
+  function current() {
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    return window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "t" || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (/input|textarea|select/i.test(e.target.tagName)) return;
+    var next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem(KEY, next); } catch (e) {}
+  });
+})();
+</script>

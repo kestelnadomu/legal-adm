@@ -44,7 +44,8 @@ format:
     bibliography:
       - bib/ref.bib
     csl: bib/apa.csl
-    theme: [default, styles/light.scss]
+    theme: [default, styles/slides.scss]
+    include-after-body: styles/theme-toggle.html
     footer: |
       *Assessment and Mitigation of Bias in LLM-driven Jurisdictional Decision-making* - [Leo Kestel](mailto:leo.kestel@lmu.de)
 ---

@@ -1,32 +1,17 @@
-/*-- scss:defaults --*/
+// ==============================
+// DARK PALETTE — loaded by slides.scss
+// ==============================
+$dark: (
+  bg: #000030,
+  fg: #f0f1eb,
+  primary: #fea411,
+  secondary: #00b13a,
+  emph-weight: normal,
 
-// constants
-$bg: #000030 !default;
-$fg: #f0f1eb !default;
-$primary: #fea411 !default;
-$secondary: #00b13a !default;
-
-// logos
-$soda: "/img/soda.svg" !default;
-$lmu: "/img/lmu-dark.png" !default;
-$mcml: "/img/mcml-dark.png" !default;
-$ada: "/img/ada-dark.svg" !default;
-$bidt: "/img/bidt-dark.png" !default;
-$ondatix: "/img/ondatix-dark.svg" !default;
-
-@import "_common.scss";
-
-
-/* ==============================
-   EMPHASIS — COLOR ONLY, NO BOLD
-   ============================== */
-
-a {
-  font-weight: normal !important;
-}
-
-strong, b, h1, h2, h3, h4, h5, h6, em, it {
-  font-weight: normal !important;
-  font-style: normal !important;
-  color: $primary;
-}
+  logo-soda: "/img/soda.svg",
+  logo-lmu: "/img/lmu-dark.png",
+  logo-mcml: "/img/mcml-dark.png",
+  logo-ada: "/img/ada-dark.svg",
+  logo-bidt: "/img/bidt-dark.png",
+  logo-ondatix: "/img/ondatix-dark.svg",
+);
