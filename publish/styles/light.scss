@@ -7,12 +7,12 @@ $primary: #000030 !default;
 $secondary: #005d3a !default;
 
 // logos
-$soda: "img/soda.svg" !default;
-$lmu: "img/lmu-light.png" !default;
-$mcml: "img/mcml-light.png" !default;
-$ada: "img/ada-light.svg" !default;
-$bidt: "img/bidt-light.png" !default;
-$ondatix: "img/ondatix-light.svg" !default;
+$soda: "/img/soda.svg" !default;
+$lmu: "/img/lmu-light.png" !default;
+$mcml: "/img/mcml-light.png" !default;
+$ada: "/img/ada-light.svg" !default;
+$bidt: "/img/bidt-light.png" !default;
+$ondatix: "/img/ondatix-light.svg" !default;
 
 @import "_common.scss";
 

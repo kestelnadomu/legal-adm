@@ -42,6 +42,12 @@ $font-family-text: "Funnel Sans", sans-serif !default;
 $mainFont: $font-family-text;
 $presentation-heading-font: $font-family-monospace;
 
+// font sizes (reveal defaults: root 40px, h1 2.5em, h2 1.6em, h3 1.3em)
+$presentation-font-size-root: 30px;
+$presentation-h1-font-size: 1.5em;
+$presentation-h2-font-size: 1.2em;
+$presentation-h3-font-size: 1em;
+
 // // constants
 // $bg: #000030 !default;
 // $fg: #f0f1eb !default;
@@ -124,8 +130,6 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-
-
 /* ==============================
    QUARTO ELEMENT TUNING
    ============================== */
@@ -154,32 +158,32 @@ th, td {
 
 img.mcml {
   content: url(#{ $mcml });
-  height: 4em;
+  height: 2.5em;
   alt: "MCML";
 }
 img.lmu {
   content: url(#{ $lmu });
-  height: 4em;
+  height: 2.5em;
   alt: "LMU";
 }
 img.soda {
   content: url(#{ $soda });
-  height: 4em;
+  height: 2.5em;
   alt: "SODA";
 }
 img.ada {
   content: url(#{ $ada });
-  height: 4em;
+  height: 2.5em;
   alt: "ADA";
 }
 img.bidt {
   content: url(#{ $bidt });
-  height: 4em;
+  height: 2.5em;
   alt: "bidt";
 }
 img.ondatix {
   content: url(#{ $ondatix });
-  height: 4em;
+  height: 2.5em;
   alt: "ondatix";
 }
 
@@ -202,14 +206,15 @@ img.ondatix {
 // #title-slide .quarto-title-author-email {
 //   color: $secondary;
 // }
-// #title-slide .quarto-title-author-name,
-// #title-slide .quarto-title-affiliation,
-// #title-slide .quarto-title-author-email {
-//   font-family: $font-family-monospace;
-// }
+#title-slide .quarto-title-author-name,
+#title-slide .quarto-title-affiliation,
+#title-slide .quarto-title-author-email {
+  font-family: $font-family-monospace;
+}
+
 
 // headings
 // $presentation-heading-font: $font-family-monospace !default;
 // $presentation-heading-color: $primary !default;
-// $presentation-heading-font-size: "4em" !default;
+// $presentation-heading-font-size: "2em" !default;
 // $presentation-heading-font-weight: "normal" !default;

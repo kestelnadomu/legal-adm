@@ -6,9 +6,10 @@ author:
     affiliation: 
       - id: img
         name: |
-            ![LMU](publish/img/lmu-light.png.png){height="2.5em"}
-            ![MCML](publish/img/mcml-light.png.png){height="2.5em"}
-            ![bidt](publish/img/bidt-light.png.png){height="2.5em"}
+            ![](){.lmu}
+            ![](){.ada}
+            ![](){.mcml}
+            ![](){.bidt}
       # - id: lmu
       #   name: Ludwig-Maximilians-Universität München 
       # - id: mcml
@@ -27,7 +28,7 @@ format:
     toc: true
     toc-title: Contents
     toc-depth: 1
-    number-sections: true
+    number-sections: false
     number-depth: 1
     scrollable: true
     center-title-slide: true
@@ -50,7 +51,6 @@ format:
 
 # Causal Bias-Pathways in Jurisdictional Decision-making
 - RQ: How do sensitive attributes affect jurisdictional decisions?
-- 
   - What are the causal pathways (mediators, confounders) through which sensitive attributes affect decisions?
 
 # Step 1: Conceptualization
@@ -61,6 +61,7 @@ format:
 - Contribution:
   - Workshop methodology for causal DAG elicitation
   - Causal DAG for each use case
+
 
 # Step 2: Testing
 
