@@ -1,0 +1,67 @@
+---
+title: Assessment and Mitigation of Bias in LLM-driven Jurisdictional Decision-making
+subtitle: Research Agenda
+author:
+  - name: Leonhard Kestel
+    affiliation: 
+      - id: img
+        name: |
+            ![LMU](publish/img/lmu-light.png.png){height="2.5em"}
+            ![MCML](publish/img/mcml-light.png.png){height="2.5em"}
+            ![bidt](publish/img/bidt-light.png.png){height="2.5em"}
+      # - id: lmu
+      #   name: Ludwig-Maximilians-Universität München 
+      # - id: mcml
+      #   name: Munich Center of Machine Learning
+    email: leo.kestel@lmu.de
+#   - name: Christoph Kern
+#     affiliation: 
+#       - ref: lmu
+#       - ref: mcml
+
+title-slide-attributes: 
+  data-footer: false
+
+format:
+  revealjs:
+    toc: true
+    toc-title: Contents
+    toc-depth: 1
+    number-sections: true
+    number-depth: 1
+    scrollable: true
+    center-title-slide: true
+    scroll-view: false
+    incremental: true
+    slide-number: false
+    chalkboard: true
+    reference-location: document
+    preview-links: auto
+    logo: ""
+    transition: slide
+    background-transition: fade
+    bibliography:
+      - bib/ref.bib
+    csl: bib/apa.csl
+    theme: [default, styles/light.scss]
+    footer: |
+      *Assessment and Mitigation of Bias in LLM-driven Jurisdictional Decision-making* - [Leo Kestel](mailto:leo.kestel@lmu.de)
+---
+
+# Causal Bias-Pathways in Jurisdictional Decision-making
+- RQ: How do sensitive attributes affect jurisdictional decisions?
+- 
+  - What are the causal pathways (mediators, confounders) through which sensitive attributes affect decisions?
+
+# Step 1: Conceptualization
+- Method:
+  - Workshops with legal experts to identify causal pathways and construct causal DAGs
+  - Embedding in ADA project^[https://ada-oeffentliche-verwaltung.de]
+  - 1 Workshop for each use case
+- Contribution:
+  - Workshop methodology for causal DAG elicitation
+  - Causal DAG for each use case
+
+# Step 2: Testing
+
+# Step 3: Mitigation

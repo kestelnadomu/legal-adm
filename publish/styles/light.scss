@@ -1,0 +1,32 @@
+/*-- scss:defaults --*/
+
+// constants
+$bg: #f0f1eb !default;
+$fg: #000000 !default;
+$primary: #000030 !default;
+$secondary: #005d3a !default;
+
+// logos
+$soda: "img/soda.svg" !default;
+$lmu: "img/lmu-light.png" !default;
+$mcml: "img/mcml-light.png" !default;
+$ada: "img/ada-light.svg" !default;
+$bidt: "img/bidt-light.png" !default;
+$ondatix: "img/ondatix-light.svg" !default;
+
+@import "_common.scss";
+
+
+/* ==============================
+   EMPHASIS — BOLD
+   ============================== */
+
+a {
+  font-weight: bold !important;
+}
+
+h1, h2, h3, h4, h5, h6, strong, b, em, it {
+  font-weight: bold !important;
+  font-style: normal !important;
+  color: $primary;
+}
