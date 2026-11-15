@@ -33,7 +33,7 @@ format:
     scrollable: true
     center-title-slide: true
     scroll-view: false
-    incremental: true
+    incremental: false
     slide-number: false
     chalkboard: true
     reference-location: document
@@ -46,6 +46,11 @@ format:
     csl: bib/apa.csl
     theme: [default, styles/slides.scss]
     include-after-body: styles/theme-toggle.html
+    include-in-header:
+      text: |
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    mermaid:
+      theme: neutral
     footer: |
       *Assessment and Mitigation of Bias in LLM-driven Jurisdictional Decision-making* - [Leo Kestel](mailto:leo.kestel@lmu.de)
 ---
@@ -55,15 +60,175 @@ format:
   - What are the causal pathways (mediators, confounders) through which sensitive attributes affect decisions?
 
 # Step 1: Conceptualization
-- Method:
-  - Workshops with legal experts to identify causal pathways and construct causal DAGs
-  - Embedding in ADA project^[https://ada-oeffentliche-verwaltung.de]
-  - 1 Workshop for each use case
-- Contribution:
-  - Workshop methodology for causal DAG elicitation
-  - Causal DAG for each use case
 
+::: {.callout-note .fragment}
+## Method
+- Workshops with legal experts to identify causal pathways and construct causal DAGs
+- Collaboration with ADA project^[[ada-oeffentliche-verwaltung.de](https://ada-oeffentliche-verwaltung.de)]
+- 1 Workshop for each use case
+:::
+
+::: {.fragment}
+```{mermaid}
+---
+config:
+  block:
+    padding: 15
+---
+block-beta
+  columns 10
+  space:2
+  ws("fa:fa-users<br/>Expert workshop:<br/>Use Case 1"):2
+  arr<["&nbsp;"]>(right)
+  block:DAG:3
+    columns 3
+    space nZ(("Z")) space
+    nA(("A")) space nY(("Y"))
+    space nW(("W")) space
+  end
+  nA --> nW
+  nW --> nY
+  nA --> nY
+  nZ --> nW
+  nZ --> nY
+  nA --- nZ
+  space:2
+```
+:::
+
+::: {.callout-tip .fragment}
+## Contribution
+- Workshop/Interview guideline for causal DAG elicitation
+- Causal DAG for each use case [@plecko2022sfm]
+:::
 
 # Step 2: Testing
 
+::: {.callout-note .fragment}
+## Method
+- Generate a coupled factual-counterfactual test dataset for each identified causal bias pathway identified in the DAG
+- Test LLM-driven decisions by quantifying the effect of sensitive attributes on decisions through each causal bias pathway
+:::
+::: {.fragment}
+```{mermaid}
+---
+config:
+  block:
+    padding: 15
+---
+block-beta
+  columns 10
+  block:DAG:3
+    columns 3
+    space nZ(("Z")) space
+    nA(("A")) space nY(("Y"))
+    space nW(("W")) space
+  end
+  nA --> nW
+  nW --> nY
+  nA --> nY
+  nZ --> nW
+  nZ --> nY
+  nA --- nZ
+
+  vs1("vs.")
+
+  block:DAGcf1:3
+    columns 3
+    space nZcf1(("Z")) space
+    nAcf1(("A")) space nYcf1(("Y"))
+    space nWcf1(("W")) space
+  end
+  nAcf1 --> nWcf1
+  nWcf1 --> nYcf1
+  nZcf1 --> nWcf1
+  nZcf1 --> nYcf1
+  nAcf1 --- nZcf1
+
+
+  vs2("vs.")
+
+  block:DAGcf2:3
+    columns 3
+    space nZcf2(("Z")) space
+    nAcf2(("A")) space nYcf2(("Y"))
+    space nWcf2(("W")) space
+  end
+  nWcf2 --> nYcf2
+  nZcf2 --> nWcf2
+  nZcf2 --> nYcf2
+  nAcf2 --- nZcf2
+```
+:::
+
+
+::: {.callout-tip .fragment}
+## Contribution
+- Generation pipeline for coupled factual-counterfactual test datasets
+- Quantification of causal bias effects in LLM-driven decisions
+:::
+
+TODO: effect quantification table
+
+
 # Step 3: Mitigation
+
+::: {.callout-note .fragment}
+## Method A
+- Use Modular Latent-Space Operations (MLOs) to intervene on sensitive attributes and their causal pathways in the latent space of an LLM.
+- Generate decisions for all factual and counterfactual versions of the DAG.
+:::
+
+::: {.callout-note .fragment}
+## Method B
+- Pre-process input data with a text autoencoder and MLOs.
+- Generate decisions for all factual and counterfactual versions of the DAG.
+:::
+
+
+::: {.callout-tip .fragment}
+## Contribution
+- Application of MLOs [@kestel2026mlo]
+- Method to provide selection of factual and counterfactual LLM-decisions:
+  - Automated factual AND counterfactual decision
+:::
+
+
+# Step 3: Mitigation
+TODO: Example Mermaid DAG
+
+
+# Step 4: Explanation
+
+::: {.callout-note .fragment}
+## Method
+Use an LLM to explain the effect quantification output from Step 3 in natural language.
+:::
+
+::: {.callout-tip .fragment}
+## Contribution
+- Application of LLM-explanation methodology [@berarducci2026cfa_llm]
+- Understandable explanation of causal bias effects in one particular LLM-driven decision
+:::
+
+TODO: Example Mermaid DAG
+
+# Final Bias Quantification and Mitigation Module
+
+```{mermaid}
+flowchart
+  ws["Workshop"] --> dag("Causal DAG")
+  dag --> bench("Test Dataset")
+  bench --> effect("Causal Effect Quantification")
+  dag --> scm["Structural Causal Model"]
+  effect --> scm
+  scm --> mlo["MLO Intervention"]
+  text("Court file") --> mlo
+  mlo --> cftext("Counterfactual court file")
+  text --> y("LLM decision")
+  cftext --> cfy("Counterfactual LLM decision")
+  y --> effect
+end
+```
+
+# References

@@ -172,3 +172,34 @@ th, td {
     height: 2.5em;
   }
 }
+
+// Mermaid diagrams: centered; A–Z (confounding) link dashed
+.reveal .cell-output-display:has(.mermaid-js),
+.reveal .cell-output-display:has(svg) {
+  text-align: center;
+  svg { display: block; margin: 0 auto; }
+}
+.reveal .mermaid-js path[id$="-nA-nZ"],
+.reveal .mermaid-js path[id$="-nAcf1-nZcf1"],
+.reveal .mermaid-js path[id$="-nAcf2-nZcf2"] {
+  stroke-dasharray: 6 4 !important;
+}
+.reveal .mermaid-js foreignObject { overflow: visible; }
+.reveal .mermaid-js .nodeLabel,
+.reveal .mermaid-js .label {
+  font-family: $font-family-monospace !important;
+  // font-size: 14px !important;
+  // line-height: 1.5 !important;
+}
+// Highlighted causal paths A→W, A→Y in red (arrowheads follow via context-stroke)
+.reveal .mermaid-js path[id$="-nA-nW"],
+.reveal .mermaid-js path[id$="-nA-nY"],
+.reveal .mermaid-js path[id$="-nAcf1-nWcf1"]  {
+  stroke: #d62728 !important;
+}
+.reveal .mermaid-js marker path { fill: context-stroke !important; stroke: none !important; }
+// Rounded corners for DAG container blocks (block ids starting with "DAG")
+.reveal .mermaid-js g[id^="DAG"] > rect.composite {
+  rx: 12px;
+  ry: 12px;
+}
