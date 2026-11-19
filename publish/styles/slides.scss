@@ -266,8 +266,13 @@ th, td {
 .reveal .rq-list ul { list-style: none; margin-left: 0; padding-left: 0; }
 .reveal .rq-list li { margin-bottom: 0.3em; font-size: 0.85em; }
 
-// red legend labels matching the highlighted A→W / A→Y edges
-.reveal .path-bias { color: #d62728; font-weight: bold; }
+// bias-path labels, same colours as the arrows in img/dag-*.svg
+:root {
+  --path-direct: #b85450;
+  --path-indirect: #b5739d;
+}
+.reveal .path-direct-bias   { color: var(--path-direct) !important; font-weight: bold; }
+.reveal .path-indirect-bias { color: var(--path-indirect) !important; font-weight: bold; }
 .reveal .small { font-size: 0.8em; }
 // target slide: let the pipeline diagram use the full slide width
 // target slide: pipeline with an RQ badge under each stage
@@ -297,7 +302,8 @@ th, td {
   top: 1.1em;
   color: var(--fg);
 }
-.reveal .pipeline .box {
+.reveal .pipeline .box,
+.reveal .testflow .box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -311,3 +317,60 @@ th, td {
   i { font-size: 1.5em; color: var(--primary); }
 }
 .reveal .pipeline .rq { margin-right: 0; border-style: dashed; }
+
+// Step 2: factual / counterfactual test flow (one row per DAG)
+.reveal .testflow {
+  display: grid;
+  grid-template-columns: 7.5em auto 5.5em auto 3em auto 3.2em auto 10em;
+  grid-template-rows: auto repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em 0.4em;
+  margin: 0.6em 0;
+  .hd {
+    font-family: $font-family-monospace !important;
+    font-size: 0.55em;
+    text-align: center;
+    opacity: 0.7;
+  }
+  .dagcell {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    img { width: 3em; height: auto; margin: 0; }
+    .lab { font-size: 0.5em; line-height: 1.2; white-space: nowrap; }
+  }
+  .arr { font-size: 0.6em; }
+  // icon beside label instead of above it, to keep rows short
+  .box { font-size: 0.6em; padding: 0.25em 0; flex-direction: row; justify-content: center; gap: 0.4em; }
+  .box > i { font-size: 1.2em; }
+  .box > span:not(.eq) { font-family: $font-family-monospace !important; }
+  // boxes spanning all three rows
+  .llm, .effect {
+    grid-row: 2 / span 3;
+    align-self: stretch;
+    justify-content: center;
+  }
+  .llm { grid-column: 5; flex-direction: column; }
+  .effect { grid-column: 9; flex-direction: column; gap: 0.2em; }
+  .effect .ttl i { font-size: 1.2em; }
+  .efftab {
+    font-size: 0.7em;
+    margin: 0;
+    border-collapse: collapse;
+    th, td {
+      border: none;
+      border-bottom: 1px solid var(--fg);
+      padding: 0.1em 0.35em;
+      text-align: left;
+      font-family: $font-family-monospace !important;
+      line-height: 1.2;
+    }
+    th { font-weight: normal; opacity: 0.7; vertical-align: bottom; }
+    td:last-child, th:last-child { text-align: right; }
+    tr:last-child td { border-bottom: none; }
+    .total td { font-weight: bold; }
+  }
+  .effect .note { font-size: 0.6em; opacity: 0.7; font-family: $font-family-monospace !important;
+  }
+}
