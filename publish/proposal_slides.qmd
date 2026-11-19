@@ -20,6 +20,9 @@ author:
 #       - ref: lmu
 #       - ref: mcml
 
+resources:
+  - img/
+
 title-slide-attributes: 
   data-footer: false
 

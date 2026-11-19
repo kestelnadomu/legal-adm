@@ -73,10 +73,16 @@ $themed-images: (
 // entries rendered at logo height
 $logos: (soda, lmu, mcml, ada, bidt, ondatix);
 
+// CSS url()s resolve against the compiled theme file, which Quarto writes to
+// <deck>_files/libs/revealjs/dist/theme/ — five levels below publish/.
+// Relative (not "/img/") so the deck also works under a sub-path such as
+// GitHub Pages' /<repo>/.
+$img-root: "../../../../../img/";
+
 @mixin themed-images($mode) {
   @each $name, $src in $themed-images {
     $file: if(str-index("#{$src}", "."), $src, "#{$name}-#{$mode}.#{$src}");
-    --img-#{$name}: url("/img/#{$file}");
+    --img-#{$name}: url("#{$img-root}#{$file}");
   }
 }
 
@@ -213,7 +219,9 @@ th, td {
   }
 }
 @each $name in $logos {
-  img.#{$name} { height: 2.5em; }
+  // max-height, not height: once reveal.js sets the img's src, Chrome ignores
+  // height on an image whose content comes from CSS and shows it full size
+  img.#{$name} { height: 2.5em; max-height: 2.5em; width: auto; }
 }
 
 // Mermaid diagrams: centered; A–Z (confounding) link dashed

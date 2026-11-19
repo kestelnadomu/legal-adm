@@ -13,6 +13,9 @@ author:
             ![](){.bidt}
     email: leo.kestel@lmu.de
 
+resources:
+  - img/
+
 title-slide-attributes:
   data-footer: false
 
