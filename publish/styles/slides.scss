@@ -14,6 +14,7 @@ $light: (
   primary: #000030,
   secondary: #005d3a,
   emph-weight: bold,
+  contrib-width: 2.5px,
 );
 $dark: (
   bg: #000030,
@@ -21,6 +22,7 @@ $dark: (
   primary: #fea411,
   secondary: #00b13a,
   emph-weight: normal,
+  contrib-width: 1.5px,
 );
 
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap");
@@ -50,6 +52,7 @@ $link-color: map-get($light, secondary) !default;
   --primary: #{map-get($p, primary)};
   --secondary: #{map-get($p, secondary)};
   --emph-weight: #{map-get($p, emph-weight)};
+  --contrib-width: #{map-get($p, contrib-width)};
 }
 
 
@@ -320,6 +323,9 @@ th, td {
 
 // Step 2: factual / counterfactual test flow (one row per DAG)
 .reveal .testflow {
+  // a step's contribution: primary-coloured, thicker outline (see palettes)
+  .contrib { border: var(--contrib-width) solid var(--primary) !important; }
+  .bigdag.contrib { border-radius: 8px; padding: 0.2em; }
   // shared: boxes spanning several rows (placed via inline grid-row/column)
   .tall, .box.tall {
     align-self: stretch;
@@ -422,7 +428,7 @@ th, td {
     align-items: flex-start;
     gap: 0.3em;
     padding: 0.5em 0.7em;
-    border: 1.5px solid var(--primary);
+    border: var(--contrib-width) solid var(--primary);
     border-radius: 14px 14px 14px 2px;
     font-size: 0.55em;
     line-height: 1.35;
