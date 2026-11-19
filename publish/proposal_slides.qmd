@@ -301,7 +301,7 @@ Use an LLM to explain the effect quantification output from Step 3 in natural la
 <div class="testflow modflow">
   <div class="lane" style="grid-row:1; grid-column:1 / 4">Step 1: Conceptualization</div>
   <div class="lane" style="grid-row:1; grid-column:5 / 7">Step 2: Testing</div>
-  <div class="lane" style="grid-row:1; grid-column:7 / 12">Steps 2–3: LLM-diven decisions</div>
+  <div class="lane" style="grid-row:1; grid-column:7 / 12">Steps 2–3: LLM-driven decisions</div>
   <div class="lane" style="grid-row:1; grid-column:12 / -1">Step 4: Explanation</div>
   <div class="box contrib" style="grid-row:2; grid-column:1"><i class="fa-solid fa-users"></i><span>Workshop</span></div>
   <div class="arr" style="grid-row:2; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
