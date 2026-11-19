@@ -320,6 +320,21 @@ th, td {
 
 // Step 2: factual / counterfactual test flow (one row per DAG)
 .reveal .testflow {
+  // shared: boxes spanning several rows (placed via inline grid-row/column)
+  .tall, .box.tall {
+    align-self: stretch;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .arr.tall { display: flex; align-items: center; }
+  // a plain line ending in an arrow, e.g. a factual bypass
+  .link {
+    display: flex;
+    align-items: center;
+    font-size: 0.6em;
+    &::before { content: ""; flex: 1; border-top: 1.5px solid var(--fg); }
+    i { margin-left: -0.3em; }
+  }
   display: grid;
   grid-template-columns: 7.5em auto 5.5em auto 3em auto 3.2em auto 10em;
   grid-template-rows: auto repeat(3, 1fr);
@@ -373,4 +388,90 @@ th, td {
   }
   .effect .note { font-size: 0.6em; opacity: 0.7; font-family: $font-family-monospace !important;
   }
+}
+
+// Step 3: autoencoder + MLO mitigation flow (reuses .testflow)
+// .span boxes cover all three rows; set their column inline.
+.reveal .testflow.mitflow {
+  grid-template-columns: 3em auto 3.2em auto 6em auto 3.2em auto 5.2em auto 2.8em auto 6em;
+  column-gap: 0.3em;
+  font-size: 0.9em; // 13 columns: scale the whole figure down a bit
+  // DAG sitting on the bypass line; bg backing hides the line behind it
+  .marker {
+    justify-content: center;
+    z-index: 1;
+    img { background: var(--bg); padding: 0 0.2em; }
+  }
+  .dagcell .box { flex: 1; white-space: nowrap; }
+  .dec {
+    justify-content: flex-start;
+    padding-left: 0.5em;
+    .lab { font-size: 0.75em; opacity: 0.75; font-family: $font-family-text !important; line-height: 1.1; }
+  }
+}
+
+// Step 4: case-level effects -> LLM -> natural-language explanation
+.reveal .testflow.expflow {
+  grid-template-columns: 8.2em auto 8.5em auto 5em auto 12.5em;
+  font-size: 0.9em;
+  .dagcell .box { flex: 1; white-space: nowrap; }
+  .effect { gap: 0.2em; }
+  .effect .ttl i { font-size: 1.2em; }
+  .bubble {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3em;
+    padding: 0.5em 0.7em;
+    border: 1.5px solid var(--primary);
+    border-radius: 14px 14px 14px 2px;
+    font-size: 0.55em;
+    line-height: 1.35;
+    i { font-size: 1.6em; color: var(--primary); }
+    p { margin: 0; }
+  }
+}
+
+// Step 1: use case -> workshop -> causal DAG -> bias pathways -> counterfactual DAGs
+.reveal .testflow.defflow {
+  grid-template-columns: 4.5em auto 5.5em auto 7em auto 6em auto 8em;
+  grid-template-rows: auto repeat(2, 1fr);
+  font-size: 0.9em;
+  .box .lab { font-size: 0.75em; opacity: 0.75; font-family: $font-family-text !important; line-height: 1.15; text-align: center; }
+  .bigdag { display: flex; img { width: 100%; height: auto; margin: 0; } }
+  .path { flex-direction: column; gap: 0; padding: 0.4em 0; }
+  .dagcell img { width: 3.5em; }
+}
+
+// Final module: Step 1 | Step 2 lanes on top, Step 3 lane below, shared LLM -> Explanation
+.reveal .testflow.modflow {
+  grid-template-columns: 4.4em auto 5em auto 5em auto 3.2em auto 4.8em auto 4.6em auto 6em;
+  grid-template-rows: auto;
+  row-gap: 0.25em;
+  font-size: 0.85em;
+  .lane {
+    font-family: $font-family-monospace !important;
+    font-size: 0.55em;
+    opacity: 0.7;
+    border-bottom: 1px dashed var(--fg);
+    padding-bottom: 0.1em;
+    margin-top: 0.4em;
+    align-self: end;
+    white-space: nowrap;
+  }
+  // down arrow crossing the lane divider
+  // label without its own divider (sits over a full-width .lane line)
+  .lane.bare { border-bottom-color: transparent; }
+  // down arrow on the lane divider; bg backing so the line runs behind it
+  .varr {
+    font-size: 0.6em;
+    text-align: center;
+    align-self: end;
+    z-index: 1;
+    margin-bottom: -0.5em;
+    i { background: var(--bg); padding: 0.15em 0.1em; }
+  }
+  // shared output boxes: compact, centred on the LLM
+  .box.tall.short { align-self: center; padding: 0.6em 0; }
+  .bigdag { display: flex; justify-content: center; img { width: 100%; height: auto; margin: 0; } }
+  .box .lab { font-size: 0.75em; opacity: 0.75; font-family: $font-family-text !important; }
 }

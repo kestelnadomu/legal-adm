@@ -120,7 +120,7 @@ Through which causal pathways (mediators, confounders) do sensitive attributes a
   <div class="hd">Causal DAG</div><div></div><div class="hd">Test cases</div><div></div><div class="hd">LLM</div><div></div><div class="hd">Decision</div><div></div><div class="hd">Effect</div>
   <div class="dagcell"><img class="dag" src="img/dag-light.svg" alt="Factual DAG"><span class="lab">Factual</span></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
-  <div class="box"><i class="fa-solid fa-file-lines"></i>Court files</div>
+  <div class="box"><i class="fa-solid fa-file-lines"></i>Court file</div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
   <div class="box llm"><i class="fa-solid fa-robot"></i>LLM</div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
@@ -139,14 +139,14 @@ Through which causal pathways (mediators, confounders) do sensitive attributes a
   </div>
   <div class="dagcell"><img class="dag-direct" src="img/dag-direct-light.svg" alt="Counterfactual 1 DAG"><span class="lab">Counterfactual 1<br/><small>no direct path</small></span></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
-  <div class="box"><i class="fa-solid fa-file-lines"></i><span>Court files′<sub>1</sub></span></div>
+  <div class="box"><i class="fa-solid fa-file-lines"></i><span>Court file′<sub>1</sub></span></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
   <div class="box"><i class="fa-solid fa-gavel"></i><span>Y′<sub>1</sub></span></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
   <div class="dagcell"><img class="dag-indirect" src="img/dag-indirect-light.svg" alt="Counterfactual 2 DAG"><span class="lab">Counterfactual 2<br/><small>no bias paths</small></span></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
-  <div class="box"><i class="fa-solid fa-file-lines"></i><span>Court files′<sub>2</sub></span></div>
+  <div class="box"><i class="fa-solid fa-file-lines"></i><span>Court file′<sub>2</sub></span></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
   <div class="arr"><i class="fa-solid fa-arrow-right"></i></div>
   <div class="box"><i class="fa-solid fa-gavel"></i><span>Y′<sub>2</sub></span></div>
@@ -164,36 +164,93 @@ Through which causal pathways (mediators, confounders) do sensitive attributes a
 
 # Step 3: Mitigation [<i class="fa-solid fa-shield-halved"></i> RQ3]{.rq} {#step-3}
 
-::: {.callout-note .fragment appearance="simple"}
+<!-- ::: {.callout-note .fragment appearance="simple"}
 ## Method A
 - Use Modular Latent-Space Operations (MLOs) to intervene on sensitive attributes and their causal pathways in the latent space of an LLM.
 - Generate decisions for all factual and counterfactual versions of the DAG.
-:::
+::: -->
 
 ::: {.callout-note .fragment appearance="simple"}
-## Method B
-- Pre-process input data with a text autoencoder and MLOs.
-- Generate decisions for all factual and counterfactual versions of the DAG.
+## Method
+1. **Pre-process** input data with a text autoencoder and **MLOs**.
+2. Generate decisions for all factual and counterfactual versions of the DAG.
 :::
 
+::: {.fragment}
+```{=html}
+<div class="testflow mitflow">
+  <div class="hd">Real input</div><div></div><div class="hd">Encode</div><div></div><div class="hd">MLO intervention</div><div></div><div class="hd">Decode</div><div></div><div class="hd">Operated files</div><div></div><div class="hd">LLM</div><div></div><div class="hd">Decision options</div>
+  <div class="box tall" style="grid-row:2 / span 3; grid-column:1"><i class="fa-solid fa-file-lines"></i><span>Court<br/>file</span></div>
+  <div class="link" style="grid-row:2; grid-column:2 / 11"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="dagcell marker" style="grid-row:2; grid-column:5"><img class="dag" src="img/dag-light.svg" alt="factual DAG"></div>
+  <div class="arr tall" style="grid-row:3 / span 2; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall" style="grid-row:3 / span 2; grid-column:3"><i class="fa-solid fa-compress"></i><span>Encoder</span></div>
+  <div class="box tall" style="grid-row:3 / span 2; grid-column:7"><i class="fa-solid fa-expand"></i><span>Decoder</span></div>
+  <div class="box tall" style="grid-row:2 / span 3; grid-column:11"><i class="fa-solid fa-robot"></i><span>LLM</span></div>
+  <div class="arr" style="grid-row:2; grid-column:12"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box dec" style="grid-row:2; grid-column:13"><i class="fa-solid fa-gavel"></i><span>Y</span><span class="lab">factual</span></div>
+  <div class="arr" style="grid-row:3; grid-column:4"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="dagcell" style="grid-row:3; grid-column:5"><img class="dag-direct" src="img/dag-direct-light.svg" alt="counterfactual DAG 1"><div class="box"><i class="fa-solid fa-shield-halved"></i><span>MLO</span></div></div>
+  <div class="arr" style="grid-row:3; grid-column:6"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arr" style="grid-row:3; grid-column:8"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box" style="grid-row:3; grid-column:9"><i class="fa-solid fa-file-lines"></i><span>Court file′<sub>1</sub></span></div>
+  <div class="arr" style="grid-row:3; grid-column:10"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arr" style="grid-row:3; grid-column:12"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box dec" style="grid-row:3; grid-column:13"><i class="fa-solid fa-gavel"></i><span>Y′<sub>1</sub></span><span class="lab">no direct<br/>bias</span></div>
+  <div class="arr" style="grid-row:4; grid-column:4"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="dagcell" style="grid-row:4; grid-column:5"><img class="dag-indirect" src="img/dag-indirect-light.svg" alt="counterfactual DAG 2"><div class="box"><i class="fa-solid fa-shield-halved"></i><span>MLO</span></div></div>
+  <div class="arr" style="grid-row:4; grid-column:6"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arr" style="grid-row:4; grid-column:8"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box" style="grid-row:4; grid-column:9"><i class="fa-solid fa-file-lines"></i><span>Court file′<sub>2</sub></span></div>
+  <div class="arr" style="grid-row:4; grid-column:10"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arr" style="grid-row:4; grid-column:12"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box dec" style="grid-row:4; grid-column:13"><i class="fa-solid fa-gavel"></i><span>Y′<sub>2</sub></span><span class="lab">bias-free</span></div>
+</div>
+```
+:::
 
 ::: {.callout-tip .fragment appearance="simple"}
 ## Contribution
-- Application of MLOs [@kestel2026mlo]
-- Method to provide selection of factual and counterfactual LLM-decisions:
-  - Automated factual AND counterfactual decision
+Application of MLOs [@kestel2026mlo]
 :::
 
 
-# Step 3: Mitigation [<i class="fa-solid fa-shield-halved"></i> RQ3]{.rq}
-TODO: Example Mermaid DAG
-
-
-# Step 4: Explanation [<i class="fa-solid fa-comment-dots"></i> RQ1]{.rq} {#step-4}
+# Step 4: Explanation [<i class="fa-solid fa-comment-dots"></i> RQ4]{.rq} {#step-4}
 
 ::: {.callout-note .fragment appearance="simple"}
 ## Method
 Use an LLM to explain the effect quantification output from Step 3 in natural language.
+:::
+
+::: {.fragment}
+```{=html}
+<div class="testflow expflow">
+  <div class="hd">Decision options</div><div></div><div class="hd">Case-level effects</div><div></div><div class="hd">Explainer</div><div></div><div class="hd">Explanation</div>
+  <div class="dagcell" style="grid-row:2; grid-column:1"><img class="dag" src="img/dag-light.svg" alt="DAG for Y"><div class="box"><i class="fa-solid fa-gavel"></i><span>Y = 9.0</span></div></div>
+  <div class="arr" style="grid-row:2; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="dagcell" style="grid-row:3; grid-column:1"><img class="dag-direct" src="img/dag-direct-light.svg" alt="DAG for Y′<sub>1</sub>"><div class="box"><i class="fa-solid fa-gavel"></i><span>Y′<sub>1</sub> = 7.8</span></div></div>
+  <div class="arr" style="grid-row:3; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="dagcell" style="grid-row:4; grid-column:1"><img class="dag-indirect" src="img/dag-indirect-light.svg" alt="DAG for Y′<sub>2</sub>"><div class="box"><i class="fa-solid fa-gavel"></i><span>Y′<sub>2</sub> = 7.3</span></div></div>
+  <div class="arr" style="grid-row:4; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall effect" style="grid-row:2 / span 3; grid-column:3"><span class="ttl"><i class="fa-solid fa-magnifying-glass"></i> Effects</span>
+    <table class="efftab">
+      <thead><tr><th>Path</th><th>Contrast</th><th>Δ mo*</th></tr></thead>
+      <tbody>
+        <tr><td class="path-direct-bias">direct</td><td>Y − Y′<sub>1</sub></td><td>+1.2</td></tr>
+        <tr><td class="path-indirect-bias">indirect</td><td>Y′<sub>1</sub> − Y′<sub>2</sub></td><td>+0.5</td></tr>
+        <tr class="total"><td>total</td><td>Y − Y′<sub>2</sub></td><td>+1.7</td></tr>
+      </tbody>
+    </table>
+    <small class="note">* illustrative, one case</small>
+  </div>
+  <div class="arr tall" style="grid-row:2 / span 3; grid-column:4"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall" style="grid-row:2 / span 3; grid-column:5"><i class="fa-solid fa-robot"></i><span>Explainer</span></div>
+  <div class="arr tall" style="grid-row:2 / span 3; grid-column:6"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="bubble tall" style="grid-row:2 / span 3; grid-column:7"><i class="fa-solid fa-comment-dots"></i>
+    <p>“The proposed driving ban is <b>9.0 months</b>. For an otherwise identical German defendant it would be <b>1.7 months shorter</b>: <span class="path-direct-bias">1.2 months</span> stem directly from nationality, <span class="path-indirect-bias">0.5 months</span> from the prior convictions linked to it.”</p>
+  </div>
+</div>
+```
 :::
 
 ::: {.callout-tip .fragment appearance="simple"}
@@ -201,8 +258,6 @@ Use an LLM to explain the effect quantification output from Step 3 in natural la
 - Application of LLM-explanation methodology [@berarducci2026cfa_llm]
 - Understandable explanation of causal bias effects in one particular LLM-driven decision
 :::
-
-TODO: Example Mermaid DAG
 
 # Step 1: Conceptualization [<i class="fa-solid fa-scale-balanced"></i> RQ1b]{.rq} {#step-1}
 
@@ -214,30 +269,23 @@ TODO: Example Mermaid DAG
 :::
 
 ::: {.fragment}
-```{mermaid}
----
-config:
-  block:
-    padding: 15
----
-block-beta
-  columns 10
-  space:2
-  ws("fa:fa-users<br/>Expert workshop:<br/>Use Case 1"):2
-  arr<["&nbsp;"]>(right)
-  block:DAG:3
-    columns 3
-    space nZ(("Z")) space
-    nA(("A")) space nY(("Y"))
-    space nW(("W")) space
-  end
-  nA --> nW
-  nW --> nY
-  nA --> nY
-  nZ --> nW
-  nZ --> nY
-  nA --- nZ
-  space:2
+```{=html}
+<div class="testflow defflow">
+  <div class="hd">Use case</div><div></div><div class="hd">Elicitation</div><div></div><div class="hd">Causal DAG</div><div></div><div class="hd">Bias pathways</div><div></div><div class="hd">Counterfactual DAGs</div>
+  <div class="box tall" style="grid-row:2 / span 2; grid-column:1"><i class="fa-solid fa-folder-open"></i><span>Drunk<br/>driving</span></div>
+  <div class="arr tall" style="grid-row:2 / span 2; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall" style="grid-row:2 / span 2; grid-column:3"><i class="fa-solid fa-users"></i><span>Expert<br/>workshop</span><span class="lab">legal experts<br/>+ ADA</span></div>
+  <div class="arr tall" style="grid-row:2 / span 2; grid-column:4"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="bigdag tall" style="grid-row:2 / span 2; grid-column:5"><img class="dag" src="img/dag-light.svg" alt="causal DAG"></div>
+  <div class="arr" style="grid-row:2; grid-column:6"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box path" style="grid-row:2; grid-column:7"><span class="path-direct-bias">direct</span><span>A → Y</span></div>
+  <div class="arr" style="grid-row:2; grid-column:8"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="dagcell" style="grid-row:2; grid-column:9"><img class="dag-direct" src="img/dag-direct-light.svg" alt="no direct path DAG"><span class="lab">no direct path</span></div>
+  <div class="arr" style="grid-row:3; grid-column:6"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box path" style="grid-row:3; grid-column:7"><span class="path-indirect-bias">indirect</span><span>A → W → Y</span></div>
+  <div class="arr" style="grid-row:3; grid-column:8"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="dagcell" style="grid-row:3; grid-column:9"><img class="dag-indirect" src="img/dag-indirect-light.svg" alt="no bias paths DAG"><span class="lab">no bias paths</span></div>
+</div>
 ```
 :::
 
@@ -249,20 +297,36 @@ block-beta
 
 # Final Bias Quantification and Mitigation Module
 
-```{mermaid}
-flowchart
-  ws["Workshop"] --> dag("Causal DAG")
-  dag --> bench("Test Dataset")
-  bench --> effect("Causal Effect Quantification")
-  dag --> scm["Structural Causal Model"]
-  effect --> scm
-  scm --> mlo["MLO Intervention"]
-  text("Court file") --> mlo
-  mlo --> cftext("Counterfactual court file")
-  text --> y("LLM decision")
-  cftext --> cfy("Counterfactual LLM decision")
-  y --> effect
-end
+```{=html}
+<div class="testflow modflow">
+  <div class="lane" style="grid-row:1; grid-column:1 / 4">Step 1: Conceptualization</div>
+  <div class="lane" style="grid-row:1; grid-column:5 / 7">Step 2: Testing</div>
+  <div class="lane" style="grid-row:1; grid-column:7 / 12">Steps 2–3: LLM-diven decisions</div>
+  <div class="lane" style="grid-row:1; grid-column:12 / -1">Step 4: Explanation</div>
+  <div class="box" style="grid-row:2; grid-column:1"><i class="fa-solid fa-users"></i><span>Workshop</span></div>
+  <div class="arr" style="grid-row:2; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="bigdag" style="grid-row:2; grid-column:3"><img class="dag" src="img/dag-light.svg" alt="causal DAG"></div>
+  <div class="arr" style="grid-row:2; grid-column:4"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box" style="grid-row:2; grid-column:5"><i class="fa-solid fa-file-lines"></i><span>Test cases</span></div>
+  <div class="arr" style="grid-row:2; grid-column:6"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="lane" style="grid-row:3; grid-column:1 / 7"></div>
+  <div class="lane bare" style="grid-row:3; grid-column:4 / 7">Step 3: Mitigation</div>
+  <div class="varr" style="grid-row:3; grid-column:3"><i class="fa-solid fa-arrow-down"></i></div>
+  <div class="box tall" style="grid-row:4 / span 2; grid-column:1"><i class="fa-solid fa-file-lines"></i><span>Court<br/>file</span></div>
+  <div class="arr" style="grid-row:4; grid-column:2"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box" style="grid-row:4; grid-column:3"><i class="fa-solid fa-shield-halved"></i><span>MLO</span></div>
+  <div class="arr" style="grid-row:4; grid-column:4"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box" style="grid-row:4; grid-column:5"><i class="fa-solid fa-file-lines"></i><span>Court file′</span></div>
+  <div class="arr" style="grid-row:4; grid-column:6"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="link" style="grid-row:5; grid-column:2 / 7"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall" style="grid-row:2 / span 4; grid-column:7"><i class="fa-solid fa-robot"></i><span>LLM</span></div>
+  <div class="arr tall" style="grid-row:2 / span 4; grid-column:8"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall short" style="grid-row:2 / span 4; grid-column:9"><i class="fa-solid fa-gavel"></i><span>Y, Y′</span><span class="lab">factual &amp;<br/>counterfactual</span></div>
+  <div class="arr tall" style="grid-row:2 / span 4; grid-column:10"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall short" style="grid-row:2 / span 4; grid-column:11"><i class="fa-solid fa-magnifying-glass"></i><span>Effects</span><span class="lab">per bias path</span></div>
+  <div class="arr tall" style="grid-row:2 / span 4; grid-column:12"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="box tall short" style="grid-row:2 / span 4; grid-column:13"><i class="fa-solid fa-comment-dots"></i><span>Explanation</span><span class="lab">bias effects in<br/>this decision</span></div>
+</div>
 ```
 
 # References
