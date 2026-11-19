@@ -2,13 +2,26 @@
 
 // ==============================
 // SLIDE THEME — the one stylesheet the deck loads.
-// Palettes live in light.scss / dark.scss. The active one is chosen at
-// runtime: system preference by default, or <html data-theme="light|dark">
-// set by theme-toggle.html (press "t").
+// Two palettes below; the active one is chosen at runtime: system
+// preference by default, or <html data-theme="light|dark"> set by
+// theme-toggle.html (press "t").
 // ==============================
 
-@import "light";
-@import "dark";
+// palettes
+$light: (
+  bg: #f0f1eb,
+  fg: #000000,
+  primary: #000030,
+  secondary: #005d3a,
+  emph-weight: bold,
+);
+$dark: (
+  bg: #000030,
+  fg: #f0f1eb,
+  primary: #fea411,
+  secondary: #00b13a,
+  emph-weight: normal,
+);
 
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
@@ -37,8 +50,30 @@ $link-color: map-get($light, secondary) !default;
   --primary: #{map-get($p, primary)};
   --secondary: #{map-get($p, secondary)};
   --emph-weight: #{map-get($p, emph-weight)};
-  @each $name in (soda, lmu, mcml, ada, bidt, ondatix) {
-    --logo-#{$name}: url("#{map-get($p, logo-#{$name})}");
+}
+
+
+// theme-aware images, used as ![](){.<name>}
+//   name: ext       -> img/<name>-light.<ext> / img/<name>-dark.<ext>
+//   name: "file.x"  -> img/file.x in both modes
+$themed-images: (
+  dag: svg,
+  dag-direct: svg,
+  dag-indirect: svg,
+  soda: "soda.svg",
+  lmu: png,
+  mcml: png,
+  ada: svg,
+  bidt: png,
+  ondatix: svg,
+);
+// entries rendered at logo height
+$logos: (soda, lmu, mcml, ada, bidt, ondatix);
+
+@mixin themed-images($mode) {
+  @each $name, $src in $themed-images {
+    $file: if(str-index("#{$src}", "."), $src, "#{$name}-#{$mode}.#{$src}");
+    --img-#{$name}: url("/img/#{$file}");
   }
 }
 
@@ -50,14 +85,17 @@ $link-color: map-get($light, secondary) !default;
 // ==============================
 :root {
   @include palette($light);
+  @include themed-images(light);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     @include palette($dark);
+    @include themed-images(dark);
   }
 }
 :root[data-theme="dark"] {
   @include palette($dark);
+  @include themed-images(dark);
 }
 
 // feed the palette into reveal.js
@@ -164,13 +202,15 @@ th, td {
 
 
 // ==============================
-// LOGOS — use as ![](){.lmu}
+// THEME-AWARE IMAGES & LOGOS — see $themed-images; use as ![](){.lmu}
 // ==============================
-@each $name in (soda, lmu, mcml, ada, bidt, ondatix) {
+@each $name, $src in $themed-images {
   img.#{$name} {
-    content: var(--logo-#{$name});
-    height: 2.5em;
+    content: var(--img-#{$name});
   }
+}
+@each $name in $logos {
+  img.#{$name} { height: 2.5em; }
 }
 
 // Mermaid diagrams: centered; A–Z (confounding) link dashed
@@ -203,3 +243,71 @@ th, td {
   rx: 12px;
   ry: 12px;
 }
+
+// ==============================
+// RQ BADGES — use as [<i class="fa-solid fa-…"></i> RQ1]{.rq}
+// Shared visual reference between the RQ slide and the step slides.
+// ==============================
+.reveal .rq {
+  display: inline-block;
+  font-family: $font-family-monospace !important;
+  font-size: 0.6em;
+  font-weight: bold;
+  line-height: 1.4;
+  padding: 0.1em 0.6em;
+  margin-right: 0.3em;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: var(--secondary) !important;
+  border: 1.5px solid var(--secondary);
+  border-radius: 999px;
+}
+.reveal h1 .rq { font-size: 0.5em; margin-left: 0.4em; }
+.reveal .rq-list ul { list-style: none; margin-left: 0; padding-left: 0; }
+.reveal .rq-list li { margin-bottom: 0.3em; font-size: 0.85em; }
+
+// red legend labels matching the highlighted A→W / A→Y edges
+.reveal .path-bias { color: #d62728; font-weight: bold; }
+.reveal .small { font-size: 0.8em; }
+// target slide: let the pipeline diagram use the full slide width
+// target slide: pipeline with an RQ badge under each stage
+.reveal .pipeline {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2em;
+  margin: 1em 0;
+}
+.reveal .pipeline .stage {
+  position: relative;
+  flex: none;
+  width: 7.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+// arrow between stages, centred on the box row
+.reveal .pipeline .stage + .stage::before {
+  content: "\f061"; // fa-arrow-right
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: -1.45em;
+  top: 1.1em;
+  color: var(--fg);
+}
+.reveal .pipeline .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+  width: 100%;
+  padding: 0.4em 0;
+  font-family: $font-family-monospace !important;
+  font-size: 0.75em;
+  border: 1.5px solid var(--fg);
+  border-radius: 8px;
+  i { font-size: 1.5em; color: var(--primary); }
+}
+.reveal .pipeline .rq { margin-right: 0; border-style: dashed; }
