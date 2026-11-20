@@ -1,5 +1,5 @@
 ---
-title: Erfassung und Minderung von Bias in LLM-gestützter richterlicher Entscheidungsfindung
+title: Erfassung und Minderung von Bias in LLM-gestützter juristischer Entscheidungsfindung
 subtitle: Forschungsagenda
 lang: de
 author:
@@ -48,12 +48,12 @@ format:
     mermaid:
       theme: neutral
     footer: |
-      *Bias in LLM-gestützter richterlicher Entscheidungsfindung* - [Leo Kestel](mailto:leo.kestel@lmu.de)
+      *Bias in LLM-gestützter juristischer Entscheidungsfindung* - [Leo Kestel](mailto:leo.kestel@lmu.de)
 ---
 
 # Ziel und Forschungsfragen {#target}
 
-LLM-gestützte richterliche Entscheidungen, die erklären, *ob* sie verzerrt sind und *wie* sich der Bias mindern lässt.
+LLM-gestützte juristische Entscheidungen, die erklären, *ob* sie verzerrt sind und *wie* sich der Bias mindern lässt.
 
 ::: {.pipeline .fragment}
 ::: {.stage}
@@ -75,13 +75,13 @@ LLM-gestützte richterliche Entscheidungen, die erklären, *ob* sie verzerrt sin
 :::
 
 ::: {.rq-list .fragment .incremental}
-- [<i class="fa-solid fa-scale-balanced"></i> FF1]{.rq} Wie lässt sich Bias in richterlichen Entscheidungen **definieren**? → [Schritt 1](#step-1)
-- [<i class="fa-solid fa-magnifying-glass"></i> FF2]{.rq} Wie lässt sich Bias in LLM-gestützten richterlichen Entscheidungen **identifizieren**? → [Schritt 2](#step-2)
-- [<i class="fa-solid fa-shield-halved"></i> FF3]{.rq} Wie lässt sich Bias in LLM-gestützten richterlichen Entscheidungen **mindern**? → [Schritt 3](#step-3)
-- [<i class="fa-solid fa-comment-dots"></i> FF4]{.rq} Wie lässt sich Bias in LLM-gestützten richterlichen Entscheidungen **erklären**? → [Schritt 4](#step-4)
+- [<i class="fa-solid fa-scale-balanced"></i> FF1]{.rq} Wie lässt sich Bias in juristischen Entscheidungen **definieren**? → [Schritt 1](#step-1)
+- [<i class="fa-solid fa-magnifying-glass"></i> FF2]{.rq} Wie lässt sich Bias in LLM-gestützten juristischen Entscheidungen **identifizieren**? → [Schritt 2](#step-2)
+- [<i class="fa-solid fa-shield-halved"></i> FF3]{.rq} Wie lässt sich Bias in LLM-gestützten juristischen Entscheidungen **mindern**? → [Schritt 3](#step-3)
+- [<i class="fa-solid fa-comment-dots"></i> FF4]{.rq} Wie lässt sich Bias in LLM-gestützten juristischen Entscheidungen **erklären**? → [Schritt 4](#step-4)
 :::
 
-# Kausale Bias-Pfade in richterlicher Entscheidungsfindung [<i class="fa-solid fa-scale-balanced"></i> FF1a]{.rq} {#pathways}
+# Kausale Bias-Pfade in juristischer Entscheidungsfindung [<i class="fa-solid fa-scale-balanced"></i> FF1a]{.rq} {#pathways}
 Über welche kausalen Pfade (Mediatoren, Confounder) beeinflussen sensible Merkmale Entscheidungen?
 
 :::: {.columns .fragment}
